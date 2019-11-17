@@ -18,6 +18,7 @@ psycopg2-binary = "*"
 dj-database-url = "*"
 whitenoise = "*"
 django-admin = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
