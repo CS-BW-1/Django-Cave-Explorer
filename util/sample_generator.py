@@ -52,6 +52,8 @@ class World:
         self.height = size_y
         for i in range( len(self.grid) ):
             self.grid[i] = [None] * size_x
+        
+        print(self.grid)
 
         # Start from lower-left corner (0,0)
         x = -1 # (this will become 0 on the first step)
@@ -82,6 +84,8 @@ class World:
             # Create a room in the given direction
             room = Room(room_count, "A Generic Room", "This is a generic room.", x, y)
             # Note that in Django, you'll need to save the room after you create it
+
+            print(room.__repr__())
 
             # Save the room in the World grid
             self.grid[y][x] = room
@@ -156,7 +160,14 @@ num_rooms = 44
 width = 8
 height = 7
 w.generate_rooms(width, height, num_rooms)
-w.print_rooms()
+print(w.__str__())
+# w.print_rooms()
 
 
 print(f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {num_rooms}\n")
+
+
+# they have it so that every time you log-in it generates a new world. 
+# they generate world generation per user. every time someone logs in have a procedurally generated world as they log-in
+
+# 
