@@ -14,7 +14,7 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Player
-        fields = ('id', 'currentRoom')
+        fields = ('id', 'currentRoom', 'uuid')
 
     # def create(self, validated_data):
     #     import pdb
