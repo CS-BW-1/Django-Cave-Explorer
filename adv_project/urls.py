@@ -9,7 +9,7 @@ import sys
 # sys.path.insert(1, '/path/to/application/')
 
 router = routers.DefaultRouter()
-# router.register('players', PlayerViewSet)
+router.register('players', PlayerViewSet)
 router.register('rooms', RoomViewSet)
 
 urlpatterns = [
