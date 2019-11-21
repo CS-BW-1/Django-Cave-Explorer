@@ -30,7 +30,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
-
+ACCOUNT_EMAIL_REQUIRED = False
 # Application definition
 
 INSTALLED_APPS = [
