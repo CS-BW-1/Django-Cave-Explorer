@@ -61,12 +61,12 @@ def initialize(request):
 def move(request):
     dirs = {"n": "north", "s": "south", "e": "east", "w": "west"}
     reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
-    player = request.user.player  # comment out
-    player_id = player.id  # provide
-    player_uuid = player.uuid  # i provide
+    player = request.user.player
+    player_id = player.id
+    player_uuid = player.uuid
     data = json.loads(request.body)
-    direction = data['direction']  # provide direction
-    room = player.room()  # room
+    direction = data['direction']
+    room = player.room()
     nextRoomID = None
     if direction == "n":
         nextRoomID = room.n_to
