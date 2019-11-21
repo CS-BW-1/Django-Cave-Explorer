@@ -17,6 +17,7 @@ class Room(models.Model):
 
     def connectRooms(self, destinationRoom, direction):
         destinationRoomID = destinationRoom.id
+
         try:
             destinationRoom = Room.objects.get(id=destinationRoomID)
         except Room.DoesNotExist:
@@ -24,14 +25,18 @@ class Room(models.Model):
         else:
             if direction == "n":
                 self.n_to = destinationRoomID
+
             elif direction == "s":
                 self.s_to = destinationRoomID
+
             elif direction == "e":
                 self.e_to = destinationRoomID
+
             elif direction == "w":
                 self.w_to = destinationRoomID
+
             else:
-                print("Invalid direction")
+
                 return
             self.save()
 

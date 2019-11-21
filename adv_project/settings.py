@@ -30,7 +30,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
-
+ACCOUNT_EMAIL_REQUIRED = False
 # Application definition
 
 INSTALLED_APPS = [
@@ -117,11 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#might need to remove default_permissions_classes
+# might need to remove default_permissions_classes
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
