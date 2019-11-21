@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls import include
 from api.api import PlayerViewSet, RoomViewSet
 from rest_framework import routers
@@ -19,6 +19,6 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api/adv/', include('adventure.urls')),
     path('api/', include(router.urls)),
-    path('api-token-auth', views.obtain_auth_token),
+    re_path(r'^api-token-auth/', views.obtain_auth_token)
 
 ]
