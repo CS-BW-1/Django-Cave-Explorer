@@ -1,3 +1,5 @@
+
+
 # Sample Python code that can be used to generate rooms in
 # a zig-zag pattern.
 #
@@ -5,10 +7,8 @@
 # procedural generation algorithm and use print_rooms()
 # to see the world.
 
-from room_descriptions import room_descriptions
 
-
-class Room:
+class Room_4_world:
     def __init__(self, id, name, description, x, y):
         self.id = id
         self.name = name
@@ -48,7 +48,6 @@ class World:
         self.height = 0
         self.room_grid = None
         self.directions = ["n", "s", "e", "w"]
-        self.reverse_dirs = {"n": "s", "s": "n", "e": "w", "w": "e"}
 
     def generate_rooms(self, size_x, size_y, num_rooms):
         '''
@@ -91,8 +90,8 @@ class World:
                 direction *= -1
 
             # Create a room in the given direction
-            room = Room(room_count, "A Generic Room",
-                        "This is a generic room.", x, y)
+            room = Room_4_world(room_count, "A Generic Room",
+                                "This is a generic room.", x, y)
             # Note that in Django, you'll need to save the room after you create it
 
             # Save the room in the World grid
@@ -100,36 +99,31 @@ class World:
 
             room_object = {
                 "id": None,
-                "title": f"Room #{room.id}",
+                "title": "",
                 "description": "yet another room description",
                 "n_to": 0,
                 "s_to": 0,
                 "e_to": 0,
-                "w_to": 0,
-                "x": x,
-                "y": y
+                "w_to": 0
             }
 
             print(room_object)
             # Connect the new room to the previous room
             if previous_room is not None:
                 previous_room.connect_rooms(room, room_direction)
+                print('room_id', room.id)
+                print('room_direction', room_direction)
+                print('prev_room.id', previous_room.id)
 
                 for d in self.directions:
                     if room_direction == d:
-                        reverse_d = self.reverse_dirs[f'{d}']
-                        room_object['id'] = room.id
-                        room_object[f'{d}_to'] = room.id+1
-                        room_object[f'{reverse_d}_to'] = previous_room.id
-                        if room.id < 100:
-                            room_object["title"] = room_descriptions[room.id]['title']
-                            if len(room_descriptions[room.id]['description']) < 499:
-                                room_object["description"] = room_descriptions[room.id]['description']
-                        # room_object["title"] = f"Room # {room.id}"
-                        # room_object["description"] = f" In the {d} direction, we have room #{room.id+1} "
+                        room_object['id'] = previous_room.id
+                        room_object[f'{d}_to'] = room.id
+                        room_object["title"] = f"Room # {previous_room.id}"
+                        room_object["description"] = f" In the {d} direction, we have room #{room.id} "
 
             print(room_count)
-
+            print(self.room_grid)
             self.room_grid[room_count] = room_object
 
             # Update iteration variables
@@ -192,21 +186,20 @@ class World:
 
 
 w = World()
-num_rooms = 500
-width = 25
-height = 20
+num_rooms = 100
+width = 10
+height = 10
 w.generate_rooms(width, height, num_rooms)
 
-# w.print_rooms()
+w.print_rooms()
 
-print(w.room_grid[1:])
-
-# for a in grid:
-#     room = Room(title=a['title'], description=a['description'], n_to=a['n_to'], s_to=a['s_to'], e_to=a['e_to'], w_to=a['w_to'])
-#     room.save()
+print(w.room_grid)
 
 
-# clear
+
+
+print(
+    f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {num_rooms}\n")
 
 
 # they have it so that every time you log-in it generates a new world.
