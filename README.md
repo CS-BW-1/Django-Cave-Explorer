@@ -217,13 +217,14 @@ curl -X GET -H 'Authorization: Token cc504e88ef659843b858d61c101ca9d4f0edf979' h
 
 Steps to populate the Rooms table:
 1) truncate the Room table (find the prompt)
+- Truncate table only adventure_room restart identity;
 2) run sample_generator.py to get the room grid
 3) get in the shell (./manage.py shell)
 4) from adventure.models import Room
 5) copy paste the room_grid. grid=room_grid
 5) run this loop: 
 for a in grid:
-     room = Room(title=a['title'], description=a['description'], n_to=a['n_to'], s_to=a['s_to'], e_to=a['e_to'], w_to=a['w_to'])
+     room = Room(title=a['title'], description=a['description'], n_to=a['n_to'], s_to=a['s_to'], e_to=a['e_to'], w_to=a['w_to'], x=a['x'], y=a['y'])
      room.save() 
 
 6) check that it populated correctly in django admin or postman

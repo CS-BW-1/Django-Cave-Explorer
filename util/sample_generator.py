@@ -5,6 +5,8 @@
 # procedural generation algorithm and use print_rooms()
 # to see the world.
 
+from room_descriptions import room_descriptions
+
 
 class Room:
     def __init__(self, id, name, description, x, y):
@@ -98,33 +100,36 @@ class World:
 
             room_object = {
                 "id": None,
-                "title": "",
+                "title": f"Room #{room.id}",
                 "description": "yet another room description",
                 "n_to": 0,
                 "s_to": 0,
                 "e_to": 0,
-                "w_to": 0
+                "w_to": 0,
+                "x": x,
+                "y": y
             }
 
             print(room_object)
             # Connect the new room to the previous room
             if previous_room is not None:
                 previous_room.connect_rooms(room, room_direction)
-                print('room_id', room.id)
-                print('room_direction', room_direction)
-                print('prev_room.id', previous_room.id)
 
                 for d in self.directions:
                     if room_direction == d:
                         reverse_d = self.reverse_dirs[f'{d}']
-                        room_object['id'] = previous_room.id+1
+                        room_object['id'] = room.id
                         room_object[f'{d}_to'] = room.id+1
                         room_object[f'{reverse_d}_to'] = previous_room.id
-                        room_object["title"] = f"Room # {room.id}"
-                        room_object["description"] = f" In the {d} direction, we have room #{room.id+1} "
+                        if room.id < 100:
+                            room_object["title"] = room_descriptions[room.id]['title']
+                            if len(room_descriptions[room.id]['description']) < 499:
+                                room_object["description"] = room_descriptions[room.id]['description']
+                        # room_object["title"] = f"Room # {room.id}"
+                        # room_object["description"] = f" In the {d} direction, we have room #{room.id+1} "
 
             print(room_count)
-            print(self.room_grid)
+
             self.room_grid[room_count] = room_object
 
             # Update iteration variables
@@ -187,12 +192,12 @@ class World:
 
 
 w = World()
-num_rooms = 121
-width = 11
-height = 11
+num_rooms = 500
+width = 25
+height = 20
 w.generate_rooms(width, height, num_rooms)
 
-w.print_rooms()
+# w.print_rooms()
 
 print(w.room_grid[1:])
 
@@ -201,8 +206,7 @@ print(w.room_grid[1:])
 #     room.save()
 
 
-print(
-    f"\n\nWorld\n  height: {height}\n  width: {width},\n  num_rooms: {num_rooms}\n")
+# clear
 
 
 # they have it so that every time you log-in it generates a new world.

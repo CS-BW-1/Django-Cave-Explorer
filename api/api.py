@@ -36,7 +36,7 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
         fields = ('id', 'title', 'description', 'n_to',
-                  's_to', 'e_to', 'w_to')
+                  's_to', 'e_to', 'w_to', 'x', 'y')
 
     def create_room(self, validated_data):
         import pdb
